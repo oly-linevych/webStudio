@@ -213,3 +213,34 @@ if (i %2 === 0){
 }
 
 numbers(['ola', 'anna', 'hala', 'toma']) */
+const formData = {
+  email: "",
+  message: ""
+}
+
+const form = document.querySelector(".feedback-form");
+const localStorageKey = "feedback-form-state";
+
+form.addEventListener("input", (evt) => {
+  formData.email = evt.target.elements.email.value;
+  formData.message = evt.target.elements.message.value
+});
+
+localStorage.setItem(localStorageKey, JSON.stringify(formData));
+
+/* 
+formData.email.value = localStorage.getItem(localStorageKey) */
+
+
+if (localStorage.getItem(localStorageKey)) {
+  formData.message.value = localStorage.getItem(localStorageKey) || "";
+console.log(formData.email)
+formData.email.value = localStorage.getItem(localStorageKey) || "";
+console.log(formData.email.value)}
+
+form.addEventListener("submit", evt => {
+ 
+	console.log(evt.target.elements.message.value);
+  console.log(evt.target.elements.email.value)
+  
+});
