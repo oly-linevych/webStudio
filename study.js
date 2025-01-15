@@ -214,33 +214,55 @@ if (i %2 === 0){
 
 numbers(['ola', 'anna', 'hala', 'toma']) */
 const formData = {
-  email: "",
-  message: ""
+email:"",
+message: ""
 }
 
-const form = document.querySelector(".feedback-form");
+console.log(formData)
+ const form = document.querySelector(".feedback-form");
+
+/* const input = form.elements.email; */
+
+form.addEventListener("input", handler)
+function handler (evt)  {
+    const key = evt.target.name; 
+   const val = evt.target.value 
+ formData[key] = val 
+
+console.log(key)
+console.log(val)
+
+
+
+ localStorage.setItem(localStorageKey, JSON.stringify(formData)); 
+};  
 const localStorageKey = "feedback-form-state";
+const input = form.elements.email;
+const localInput = JSON.parse(localStorage.getItem(localStorageKey)) ?? "";
+input.value = localInput.email
 
-form.addEventListener("input", (evt) => {
-  formData.email = evt.target.elements.email.value;
-  formData.message = evt.target.elements.message.value
-});
-
-localStorage.setItem(localStorageKey, JSON.stringify(formData));
+const textarea = form.elements.message;
+const localTextarea =  JSON.parse(localStorage.getItem(localStorageKey)) ?? "";
+textarea.value =localTextarea.message
 
 /* 
 formData.email.value = localStorage.getItem(localStorageKey) */
+const localForm = JSON.parse(localStorage.getItem(localStorageKey)) ?? "";
+console.log(localForm)
 
+formData.email = localForm.email
+formData.message = localForm.message
+console.log(formData)
+console.log(localForm)
+  
 
-if (localStorage.getItem(localStorageKey)) {
-  formData.message.value = localStorage.getItem(localStorageKey) || "";
-console.log(formData.email)
-formData.email.value = localStorage.getItem(localStorageKey) || "";
-console.log(formData.email.value)}
-
+ 
 form.addEventListener("submit", evt => {
  
 	console.log(evt.target.elements.message.value);
   console.log(evt.target.elements.email.value)
+
   
-});
+  
+}); 
+
